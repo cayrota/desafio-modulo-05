@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
         border: "1px solid hsla(0, 0%, 75%, 1)",
       },
       "&.MuiOutlinedInput-adornedEnd": {
-        paddingRight: "24px"
+        paddingRight: "24px",
+        height: '47px',
       }
     },
   },

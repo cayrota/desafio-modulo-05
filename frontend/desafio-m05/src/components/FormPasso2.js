@@ -1,22 +1,38 @@
 import React from "react";
+import TextField from "./TextField";
+import Select from "./Select";
+
+const opcoes = [
+  "Diversos",
+  "Lanches",
+  "Carnes",
+  "Massas",
+  "Pizzas",
+  "Japonesa",
+  "Chinesa",
+  "Mexicano",
+  "Brasileira",
+  "Italiana",
+  "Árabe",
+];
 
 function FormPasso2() {
   return (
     <div className="FormPasso2">
       <form action="" method="post">
-        <label htmlFor="nome">Nome do restaurante</label>
-        <input type="text" />
+        <label htmlFor="nomeRestaurante">Nome do restaurante</label>
+        <TextField id="nomeRestaurante" type="text" multiline={false} />
         <label htmlFor="categoria">Categoria do restaurante</label>
-        <select name="Categorias" id="categoria">
-          <option value="Árabe">Árabe</option>
-          <option value="Japonesa">Japonesa</option>
-          <option value="Chinesa">Chinesa</option>
-          <option value="Brasileira">Brasilera</option>
-          <option value="Lanches">Lanches</option>
-        </select>
+        <Select opcoes={opcoes} />
         <label htmlFor="descricao">Descrição</label>
-        <input type="text" id="descricao" maxLength="50" />
-        <span>Máx.: 50 caracteres</span>
+        <TextField
+          type="text"
+          id="descricao"
+          multiline={true}
+          rows={2}
+          inputProps={{ maxLength: "50" }}
+        />
+        <span className="avisoQtdCaracteres">Máx.: 50 caracteres</span>
       </form>
     </div>
   );

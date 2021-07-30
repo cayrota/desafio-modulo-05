@@ -8,9 +8,9 @@ function FormPasso1() {
     <div className="FormPasso1">
       <form action="" method="post">
         <label htmlFor="nome">Nome de usuário</label>
-        <TextField id="nome" type="text" />
+        <TextField id="nome" type="text" multiline={false} />
         <label htmlFor="email">E-mail</label>
-        <TextField id="email" type="email" />
+        <TextField id="email" type="email" multiline={false} />
         <label htmlFor="senha">Senha</label>
         <InputPassword id="senha"/>
         <label htmlFor="rptSenha">Repita a senha</label>
