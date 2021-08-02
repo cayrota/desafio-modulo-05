@@ -21,7 +21,7 @@ async function consultarProdutoId(req, res) {
     const produtos = await knex('produto').where({ id, restaurante_id });
 
     if (produtos.length === 0) {
-      return res.status(404).json('Não existe produto com id informado.');
+      return res.status(404).json('Não foi localizar o produto solicitado.');
     }
 
     return res.status(200).json(produtos);
@@ -69,11 +69,12 @@ async function alterarProduto(req, res) {
     preco,
     permiteObservacoes: permite_observacoes,
   } = req.body;
+
   const restaurante_id = req.usuario.id;
   const { id } = req.params;
 
   if (!nome && !descricao && !preco && !permite_observacoes) {
-    return res.status(400).json('Deve-se preencher pelo menos um dos campos.');
+    return res.status(400).json('Favor informar ao menos um campo a ser atualizado.');
   }
 
   try {
@@ -91,7 +92,7 @@ async function alterarProduto(req, res) {
       return res.status(400).json('Erro na atualização.');
     }
 
-    res.status(200).json('Alteração feita com sucesso!');
+    res.status(200).json('Produto atualizado com sucesso!');
   } catch (error) {
     res.status(400).json(error.message);
   }
@@ -161,7 +162,7 @@ async function desativarProduto(req, res) {
       .update({ ativo: false });
 
     if (desativar.length === 0) {
-      return res.status(400).json('Erro ao ativar o produto.');
+      return res.status(400).json('Não foi possível desativar o produto.');
     }
 
     res.status(200).json('Produto desativado com sucesso!');
