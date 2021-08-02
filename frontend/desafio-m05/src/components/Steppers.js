@@ -173,6 +173,7 @@ export default function Steppers({ titulo, formsPassos }) {
             Anterior
           </Button>
           <Button
+            type={activeStep === steps.length ? "submit" : "button"}
             variant="contained"
             onClick={(e) => handleNext(e)}
             className={clsx(classes.button, classes.contained)}

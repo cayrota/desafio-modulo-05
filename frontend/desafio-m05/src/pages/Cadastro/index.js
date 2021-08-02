@@ -21,7 +21,9 @@ function Cadastro() {
       <img src={Ilustração} alt="Ilustração" className="desenhoBg" />
       <div className="formCadastro">
         <RegisterProvider>
-          <Steppers titulo="Cadastro" formsPassos={formsPassos} />
+          <form action="" method="post">
+            <Steppers titulo="Cadastro" formsPassos={formsPassos} />
+          </form>
           <Snackbar />
         </RegisterProvider>
         <span className="spanRedirLogin">
