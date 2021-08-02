@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import useValidacaoForm from "../../hooks/useValidacaoForm";
 
 const CssTextField = withStyles({
   root: {
     "& .MuiOutlinedInput-root": {
-      height: '47px',
+      height: "47px",
+      width: "408px",
       "& fieldset": {
         borderColor: "hsla(0, 0%, 75%, 1)",
       },
@@ -37,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     marginBottom: "49px",
   },
+  helperText: {
+    root: {
+      fontFamily: "'Montserrat', sans-serif",
+    },
+  },
 }));
 
 export default function TextFieldStyle({
@@ -45,9 +52,37 @@ export default function TextFieldStyle({
   multiline,
   rows,
   inputProps,
-  defaultValue
+  value,
+  setValue
 }) {
   const classes = useStyles();
+  const [campoEmBranco, setCampoEmBranco] = useState(false);
+  const valueRef = useRef();
+  const valueLocalStorageRef = useRef();
+  const { abrirMsgDeErro } = useValidacaoForm();
+
+  valueRef.current = value;
+  valueLocalStorageRef.current = localStorage.getItem(id);
+
+  useEffect(() => {
+    if (valueLocalStorageRef.current) {
+      setValue(valueLocalStorageRef.current);
+    }
+
+    if ((abrirMsgDeErro && !value) || value === "") {
+      setCampoEmBranco(true);
+    } else {
+      setCampoEmBranco(false);
+    }
+  }, [value, abrirMsgDeErro]);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  
+  if (value !== undefined) {
+    localStorage.setItem(id, valueRef.current);
+  }
 
   return (
     <form className={classes.root} noValidate>
@@ -59,7 +94,11 @@ export default function TextFieldStyle({
         multiline={multiline}
         rows={multiline ? rows : 1}
         inputProps={inputProps}
-        defaultValue={defaultValue}
+        value={value}
+        onChange={(e) => handleChange(e)}
+        error={multiline ? false : campoEmBranco}
+        helperText={multiline ? false : campoEmBranco && "Campo obrigatório"}
+        FormHelperTextProps={classes.helperText}
       />
     </form>
   );

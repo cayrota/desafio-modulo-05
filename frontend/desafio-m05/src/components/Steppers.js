@@ -7,6 +7,7 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
+import useRegister from "../hooks/useValidacaoForm";
 
 const useColorlibStepIconStyles = makeStyles({
   root: {
@@ -103,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
   stepper: {
     padding: 0,
     height: "32px",
-    marginBottom: "65px"
+    marginBottom: "65px",
   },
 }));
 
@@ -115,6 +116,7 @@ export default function Steppers({ titulo, formsPassos }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(1);
   const steps = getSteps();
+  const { erro, setAbrirMsgDeErro } = useRegister();
 
   function getStepContent(step) {
     switch (step) {
@@ -131,7 +133,13 @@ export default function Steppers({ titulo, formsPassos }) {
     }
   }
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    if (erro) {
+      return setAbrirMsgDeErro(true);
+    } else {
+      setAbrirMsgDeErro(false);
+    } 
+
     if (activeStep === steps.length) return;
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -142,7 +150,11 @@ export default function Steppers({ titulo, formsPassos }) {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} connector={""} className={classes.stepper}>
+      <Stepper
+        activeStep={activeStep}
+        connector={""}
+        className={classes.stepper}
+      >
         <h1>{titulo}</h1>
         {steps.map((label) => (
           <Step key={label}>
@@ -151,7 +163,7 @@ export default function Steppers({ titulo, formsPassos }) {
         ))}
       </Stepper>
       <div className="conteudoForm">
-        {getStepContent(activeStep)}
+        <form action="" method="post">{getStepContent(activeStep)}</form>
         <div className="botoesStepper">
           <Button
             disabled={activeStep === 1}
@@ -162,10 +174,10 @@ export default function Steppers({ titulo, formsPassos }) {
           </Button>
           <Button
             variant="contained"
-            onClick={handleNext}
+            onClick={(e) => handleNext(e)}
             className={clsx(classes.button, classes.contained)}
           >
-            {activeStep === steps.length - 1 ? "Criar conta" : "Próximo"}
+            {activeStep === steps.length ? "Criar conta" : "Próximo"}
           </Button>
         </div>
       </div>
