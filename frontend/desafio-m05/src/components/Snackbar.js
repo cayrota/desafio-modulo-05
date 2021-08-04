@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
 export default function Snackbars() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const { abrirMsgDeErro } = useRegister();
+  const { abrirMensagem, mensagem } = useRegister();
 
   useEffect(() => {
-    if (abrirMsgDeErro) setOpen(true);
-  }, [abrirMsgDeErro])
+    if (abrirMensagem) setOpen(true);
+  }, [abrirMensagem])
 
   const handleClose = () => {
     setOpen(false);
@@ -33,8 +33,8 @@ export default function Snackbars() {
   return (
     <div className={classes.root}>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
-          Campo obrigatório vazio!
+        <Alert onClose={handleClose} severity={mensagem.severidade}>
+          {mensagem.texto}
         </Alert>
       </Snackbar>
     </div>

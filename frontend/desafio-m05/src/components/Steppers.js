@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,6 +8,7 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import useRegister from "../hooks/useValidacaoForm";
+import CircularProgress from "./CircularProgress";
 
 const useColorlibStepIconStyles = makeStyles({
   root: {
@@ -106,6 +107,9 @@ const useStyles = makeStyles((theme) => ({
     height: "32px",
     marginBottom: "65px",
   },
+  buttonsStepper: {
+    margin: "40px auto 49px",
+  },
 }));
 
 function getSteps() {
@@ -116,7 +120,13 @@ export default function Steppers({ titulo, formsPassos }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(1);
   const steps = getSteps();
-  const { erro, setAbrirMsgDeErro } = useRegister();
+  const { erro, setAbrirMensagem, mensagem } = useRegister();
+
+  useEffect(() => {
+    if (activeStep === 4) {
+      setAbrirMensagem(true);
+    }
+  }, [activeStep])
 
   function getStepContent(step) {
     switch (step) {
@@ -128,19 +138,30 @@ export default function Steppers({ titulo, formsPassos }) {
         return formsPassos[1];
       case 3:
         return formsPassos[2];
+      case 4:
+        return <CircularProgress />;
       default:
         return "Unknown step";
     }
   }
 
+  const displayButtons = () => {
+    if (activeStep > steps.length) {
+      return { display: "none" };
+    } else {
+      return;
+    }
+  };
+
   const handleNext = (e) => {
     if (erro) {
-      return setAbrirMsgDeErro(true);
+      return setAbrirMensagem(true);
     } else {
-      setAbrirMsgDeErro(false);
-    } 
+      setAbrirMensagem(false);
+    }
 
-    if (activeStep === steps.length) return;
+    if (activeStep > steps.length) return;
+    
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -163,8 +184,8 @@ export default function Steppers({ titulo, formsPassos }) {
         ))}
       </Stepper>
       <div className="conteudoForm">
-        <form action="" method="post">{getStepContent(activeStep)}</form>
-        <div className="botoesStepper">
+        <form>{getStepContent(activeStep)}</form>
+        <div className={classes.buttonsStepper} style={displayButtons()}>
           <Button
             disabled={activeStep === 1}
             onClick={handleBack}
@@ -173,6 +194,7 @@ export default function Steppers({ titulo, formsPassos }) {
             Anterior
           </Button>
           <Button
+            type={activeStep === steps.length + 1 ? "submit" : "button"}
             variant="contained"
             onClick={(e) => handleNext(e)}
             className={clsx(classes.button, classes.contained)}

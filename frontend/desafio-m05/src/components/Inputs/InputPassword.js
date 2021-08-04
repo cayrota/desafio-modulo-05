@@ -47,11 +47,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function InputPassword({ id, value, setValue }) {
+export default function InputPassword({ id, value, setValue, register }) {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [campoEmBranco, setCampoEmBranco] = useState(false);
-  const { abrirMsgDeErro } = useValidacaoForm();
+  const { abrirMensagem } = useValidacaoForm();
   const valueRef = useRef();
   const valueLocalStorageRef = useRef();
 
@@ -63,12 +63,12 @@ export default function InputPassword({ id, value, setValue }) {
       setValue(valueLocalStorageRef.current);
     }
 
-    if ((abrirMsgDeErro && !value) || value === "") {
+    if ((abrirMensagem && !value) || value === "") {
       setCampoEmBranco(true);
     } else {
       setCampoEmBranco(false);
     }
-  }, [value, abrirMsgDeErro]);
+  }, [value, abrirMensagem]);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -90,6 +90,7 @@ export default function InputPassword({ id, value, setValue }) {
     <div className={clsx(classes.margin, classes.root)}>
       <div>
         <OutlinedInput
+          { ...register(`${id}`) }
           error={campoEmBranco}
           id={id}
           type={showPassword ? "text" : "password"}
