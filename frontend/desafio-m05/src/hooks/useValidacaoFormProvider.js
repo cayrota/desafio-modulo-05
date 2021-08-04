@@ -1,18 +1,17 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 
 function useValidacaoFormProvider() {
-  const { register, handleSubmit } = useForm();
   const [erro, setErro] = useState(false);
-  const [abrirMsgDeErro, setAbrirMsgDeErro] = useState(false);
+  const [mensagem, setMensagem] = useState({});
+  const [abrirMensagem, setAbrirMensagem] = useState(false);
 
   return {
-    register,
-    handleSubmit,
     erro,
     setErro,
-    abrirMsgDeErro,
-    setAbrirMsgDeErro,
+    mensagem,
+    setMensagem,
+    abrirMensagem,
+    setAbrirMensagem,
   };
 }
 

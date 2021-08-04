@@ -61,10 +61,10 @@ const MenuProps = {
   },
 };
 
-export default function Selects({ id, opcoes, value, setValue }) {
+export default function Selects({ id, opcoes, value, setValue, register }) {
   const classes = useStyles();
   const [campoEmBranco, setCampoEmBranco] = useState(false);
-  const { abrirMsgDeErro } = useValidacaoForm();
+  const { abrirMensagem } = useValidacaoForm();
   const valueRef = useRef();
   const valueLocalStorageRef = useRef();
 
@@ -76,12 +76,12 @@ export default function Selects({ id, opcoes, value, setValue }) {
       setValue(valueLocalStorageRef.current);
     }
 
-    if (abrirMsgDeErro && (value === "" || value === "0")) {
+    if (abrirMensagem && (value === "" || value === "0")) {
       setCampoEmBranco(true);
     } else {
       setCampoEmBranco(false);
     }
-  }, [value, abrirMsgDeErro]);
+  }, [value, abrirMensagem]);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -94,8 +94,10 @@ export default function Selects({ id, opcoes, value, setValue }) {
   return (
     <div className={clsx(classes.margin)}>
       <Select
+        {...register(`${id}`)}
         id={id}
         value={value}
+        {...register(id)}
         placeholder="Escolha uma categoria"
         className={classes.width}
         onChange={handleChange}

@@ -1,7 +1,7 @@
 import useValidacaoFormProvider from '../hooks/useValidacaoFormProvider';
 import ValidacaoFormContext from './ValidacaoFormContext';
 
-function ValidacaoProvider(props) {
+function ValidacaoFormProvider(props) {
     const validacaoForm = useValidacaoFormProvider();
     
     return (
@@ -9,4 +9,4 @@ function ValidacaoProvider(props) {
     );
 };
 
-export default ValidacaoProvider;
+export default ValidacaoFormProvider;

@@ -18,30 +18,53 @@ const opcoes = [
   "Árabe",
 ];
 
-function FormPasso2() {
+function FormPasso2({ register }) {
   const [nomeRestaurante, setNomeRestaurante] = useState();
   const [categoria, setCategoria] = useState("");
   const [descricao, setDescricao] = useState();
-  const { setErro } = useValidacaoForm();
+  const { setErro, setMensagem } = useValidacaoForm();
 
   useEffect(() => {
     if (!nomeRestaurante || !categoria) {
+      setMensagem({
+        texto: "Campo obrigatório vazio!",
+        severidade: "error"
+      });
       setErro(true);
-    } else if (nomeRestaurante === "" || categoria === "" || categoria === "0") {
+    } else if (
+      nomeRestaurante === "" ||
+      categoria === "" ||
+      categoria === "0"
+    ) {
+      setMensagem({
+        texto: "Campo obrigatório vazio!",
+        severidade: "error"
+      });
       setErro(true);
     } else {
+      setMensagem({});
       setErro(false);
     }
   }, [nomeRestaurante, categoria]);
 
-  const a = "0.02";
-
   return (
     <div className="FormPasso2">
       <label htmlFor="nomeRestaurante">Nome do restaurante</label>
-      <TextField id="nomeRestaurante" type="text" value={nomeRestaurante} setValue={setNomeRestaurante} />
+      <TextField
+        id="nomeRestaurante"
+        type="text"
+        value={nomeRestaurante}
+        setValue={setNomeRestaurante}
+        register={register}
+      />
       <label htmlFor="categoria">Categoria do restaurante</label>
-      <Select id="categoria" opcoes={opcoes} value={categoria} setValue={setCategoria} />
+      <Select
+        id="categoria"
+        opcoes={opcoes}
+        value={categoria}
+        setValue={setCategoria}
+        register={register}
+      />
       <label htmlFor="descricao">Descrição</label>
       <TextField
         type="text"
@@ -51,9 +74,9 @@ function FormPasso2() {
         inputProps={{ maxLength: "50" }}
         value={descricao}
         setValue={setDescricao}
+        register={register}
       />
       <span className="avisoQtdCaracteres">Máx.: 50 caracteres</span>
-      {console.log(Number(a))}
     </div>
   );
 }
