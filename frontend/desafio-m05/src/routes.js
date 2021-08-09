@@ -9,6 +9,7 @@ import React from 'react';
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Produtos from './pages/Produtos';
+import ValidacaoFormProvider from "./contexts/ValidacaoFormProvider";
 
 import { AuthProvider } from './contexts/AuthContext';
 import useAuth from './hooks/useAuth';
@@ -25,8 +26,10 @@ function Routes() {
     <AuthProvider>
       <Router>
         <Switch>
-          <Route path='/' exact component={Login} />
-          <Route path='/cadastro' component={Cadastro} />
+          <ValidacaoFormProvider>
+            <Route path="/" exact component={Login} />
+            <Route path="/cadastro" exact component={Cadastro} />
+          </ValidacaoFormProvider>
           <RotasProtegidas>
             <Route path='/produtos' component={Produtos} />
           </RotasProtegidas>

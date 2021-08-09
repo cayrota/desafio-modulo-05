@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-import useRegister from '../hooks/useValidacaoForm';
+import useValidacaoForm from '../hooks/useValidacaoForm';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Snackbars() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const { abrirMensagem, mensagem } = useRegister();
+  const { abrirMensagem, mensagem, setAbrirMensagem } = useValidacaoForm();
 
   useEffect(() => {
     if (abrirMensagem) setOpen(true);
@@ -28,6 +28,7 @@ export default function Snackbars() {
 
   const handleClose = () => {
     setOpen(false);
+    setAbrirMensagem(false);
   };
 
   return (
