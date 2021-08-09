@@ -25,7 +25,7 @@ function FormPasso1({ register }) {
       setErro(true);
     } else if (senha !== rptSenha) {
       setMensagem({
-        texto: "As senhas devem ser iguais",
+        texto: "As senhas devem ser iguais!",
         severidade: "error"
       });
       setErro(true);

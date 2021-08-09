@@ -13,7 +13,8 @@ import useValidacaoForm from "../../hooks/useValidacaoForm";
 function Cadastro() {
   const { handleSubmit, register } = useForm();
   const [carregando, setCarregando] = useState(true);
-  const { setMensagem, setAbrirMensagem, mensagem, abrirMensagem } = useValidacaoForm();
+  const { setMensagem, setAbrirMensagem } =
+    useValidacaoForm();
   const history = useHistory();
 
   const passo1 = <FormPasso1 register={register} />;
@@ -25,8 +26,8 @@ function Cadastro() {
   const { post } = require("../../requisicoes");
 
   const onSubmit = async (data) => {
-    console.log(data);
-
+    setCarregando(true);
+    
     const dadosAPI = {
       nome: data.nome,
       email: data.email,
@@ -40,12 +41,12 @@ function Cadastro() {
         valorMinimoPedido: Number(data.valorMinPedido.replace(",", ".")) * 100,
       },
     };
-
+    
     try {
       const dados = await post("cadastro", dadosAPI);
       const mensagemCadastro = await dados.json();
       setCarregando(false);
-
+      
       if (dados.status === 200) {
         setMensagem({
           texto: mensagemCadastro,
@@ -64,10 +65,10 @@ function Cadastro() {
           severidade: "error",
         });
         setAbrirMensagem(true);
-        return
+        return;
       }
-      
     } catch (error) {
+      setCarregando(false);
       setMensagem({
         texto: error.message,
         severidade: "error",
@@ -78,25 +79,25 @@ function Cadastro() {
   };
   
   return (
-      <div className="Cadastro">
-        <img src={Ilustração} alt="Ilustração" className="desenhoBg" />
-        <div className="formCadastro">
-          <form method="post" onSubmit={handleSubmit(onSubmit)}>
-            <Steppers
-              titulo="Cadastro"
-              formsPassos={formsPassos}
-              register={register}
-              statusCarregamento={carregando}
-            />
-          </form>
-          <Snackbar />
-          <span className="spanRedirLogin">
-            Já tem uma conta?{" "}
-            <Link to="/" className="linkLogin">
-              Login
-            </Link>
-          </span>
-        </div>
+    <div className="Cadastro">
+      <img src={Ilustração} alt="Ilustração" className="desenhoBg" />
+      <div className="formCadastro">
+        <form method="post" onSubmit={handleSubmit(onSubmit)}>
+          <Steppers
+            titulo="Cadastro"
+            formsPassos={formsPassos}
+            register={register}
+            statusCarregamento={carregando}
+          />
+        </form>
+        <Snackbar />
+        <span className="spanRedirLogin">
+          Já tem uma conta?{" "}
+          <Link to="/" className="linkLogin">
+            Login
+          </Link>
+        </span>
+      </div>
       </div>
   );
 }

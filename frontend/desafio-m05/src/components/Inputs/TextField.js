@@ -88,6 +88,7 @@ export default function TextFieldStyle({
   return (
     <div className={classes.root}>
       <CssTextField
+        {...register(`${id}`, {value: value})}
         id={id}
         type={type}
         className={classes.margin}

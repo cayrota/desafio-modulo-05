@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Snackbars() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const { abrirMensagem, mensagem, setAbrirMensagem, setMensagem } = useValidacaoForm();
-  
+  const { abrirMensagem, mensagem, setAbrirMensagem } = useValidacaoForm();
+
   useEffect(() => {
     if (abrirMensagem) setOpen(true);
   });

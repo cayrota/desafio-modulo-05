@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "http://localhost:8000/";
 
 async function get(resource) {
   const resposta = await fetch(BASE_URL + resource);
@@ -26,7 +26,7 @@ async function put(resource, data) {
       "Content-type": "application/json",
     },
   });
-  return resposta.json();
+  return resposta;
 }
 
 async function del(resource) {
@@ -34,7 +34,7 @@ async function del(resource) {
     method: "DELETE",
   });
 
-  return resposta.json();
+  return resposta;
 }
 
-module.exports =  { post, get, del, put };
+export { post, get, del, put };

@@ -90,7 +90,7 @@ export default function InputPassword({ id, value, setValue, register }) {
     <div className={clsx(classes.margin, classes.root)}>
       <div>
         <OutlinedInput
-          {...register(`${id}`, { value: value })}
+          {...register(`${id}`, {value: value})}
           error={campoEmBranco}
           id={id}
           type={showPassword ? "text" : "password"}

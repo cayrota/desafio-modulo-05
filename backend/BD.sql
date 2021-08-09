@@ -3,7 +3,8 @@ create database api_restaurant;
 create table if not exists categoria
 (
 	id serial unique primary key not null,
-	nome varchar(30) not null
+	nome varchar(30) not null,
+	img_categoria text not null
 );
 create table if not exists usuario
 (

@@ -121,7 +121,13 @@ export default function Steppers({ titulo, formsPassos, statusCarregamento }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(1);
   const steps = getSteps();
-  const { erro, setAbrirMensagem, mensagem, abrirMensagem } = useValidacaoForm();
+  const { erro, setAbrirMensagem, mensagem } = useValidacaoForm();
+
+  useEffect(() => {
+    if (activeStep === 4) {
+      setAbrirMensagem(true);
+    }
+  }, [activeStep]);
 
   function getStepContent(step) {
     switch (step) {
@@ -147,7 +153,8 @@ export default function Steppers({ titulo, formsPassos, statusCarregamento }) {
       setAbrirMensagem(false);
     }
 
-    if (activeStep === steps.length + 1) return;
+    if (activeStep > steps.length) return;
+
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 

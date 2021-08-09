@@ -71,24 +71,26 @@ export default function InputAmount({ id, value, setValue, register }) {
   }, [value, abrirMensagem]);
 
   const handleChange = (e) => {
-    let v = e.target.value;
-    if (v.length === 1) {
-      v = `0,0${v}`;
-    } else if (v) {
-      let a = v.split(",").join("").split("");
-      const dc = a[a.length - 2] ?? 0;
-      const uc = a[a.length - 1] ?? 0;
-      a.pop();
-      a.pop();
-      if (a.length >= 2 && a[0] === "0") {
-        a.shift();
+    let valueInput = e.target.value;
+    if (valueInput.length === 1) {
+      valueInput = `00,0${valueInput}`;
+    } else if (valueInput) {
+      let valueInputArray = valueInput.split(",").join("").split("");
+      const cents_1 = valueInputArray[valueInputArray.length - 1] ?? "0";
+      const cents_2 = valueInputArray[valueInputArray.length - 2] ?? "0";
+      valueInputArray.pop();
+      valueInputArray.pop();
+      if (valueInputArray.length === 3 && valueInputArray[0] === "0") {
+        valueInputArray.shift();
       }
-      if (a.length === 0) {
-        a = ["0"];
+      if (valueInputArray.length === 0) {
+        valueInputArray = ["0", "0"];
+      } else if (valueInputArray.length === 1) {
+        valueInputArray.unshift("0");
       }
-      v = `${a.join("") ?? 0},${dc}${uc}`;
+      valueInput = `${valueInputArray.join("")},${cents_2}${cents_1}`;
     }
-    setValue(v);
+    setValue(valueInput);
   };
 
   if (value !== undefined) {
