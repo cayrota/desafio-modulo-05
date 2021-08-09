@@ -78,7 +78,7 @@ export default function Selects({ id, opcoes, value, setValue, register }) {
 
     if (abrirMensagem && (value === "" || value === "0")) {
       setCampoEmBranco(true);
-    } else {
+    } else if (value) {
       setCampoEmBranco(false);
     }
   }, [value, abrirMensagem]);
@@ -94,7 +94,7 @@ export default function Selects({ id, opcoes, value, setValue, register }) {
   return (
     <div className={clsx(classes.margin)}>
       <Select
-        {...register(`${id}`)}
+        {...register(`${id}`, {value: value})}
         id={id}
         value={value}
         {...register(id)}

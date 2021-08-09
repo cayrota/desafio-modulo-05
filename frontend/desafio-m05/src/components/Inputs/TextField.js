@@ -72,7 +72,7 @@ export default function TextFieldStyle({
 
     if ((abrirMensagem && !value) || value === "") {
       setCampoEmBranco(true);
-    } else {
+    } else if (value) {
       setCampoEmBranco(false);
     }
   }, [value, abrirMensagem]);
@@ -88,7 +88,7 @@ export default function TextFieldStyle({
   return (
     <div className={classes.root} >
       <CssTextField
-        { ...register(`${id}`) }
+        {...register(`${id}`, {value: value})}
         id={id}
         type={type}
         className={classes.margin}

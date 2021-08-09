@@ -7,13 +7,13 @@ function FormPasso3({ register }) {
   const [taxaEntrega, setTaxaEntrega] = useState();
   const [tempoEntrega, setTempoEntrega] = useState();
   const [valorMinPedido, setValorMinPedido] = useState();
-  const { setErro, setMensagem } = useValidacaoForm();
+  const { setErro, setMensagem, setAbrirMensagem } = useValidacaoForm();
 
   useEffect(() => {
     if (!taxaEntrega || !tempoEntrega || !valorMinPedido) {
       setMensagem({
         texto: "Campo obrigatório vazio!",
-        severidade: "error"
+        severidade: "error",
       });
       setErro(true);
     } else if (
@@ -23,14 +23,30 @@ function FormPasso3({ register }) {
     ) {
       setMensagem({
         texto: "Campo obrigatório vazio!",
-        severidade: "error"
+        severidade: "error",
+      });
+      setErro(true);
+    } else if (isNaN(Number(taxaEntrega.replace(",", ".")))) {
+      setMensagem({
+        texto: "O valor do campo Taxa de entrega deve ser um número!",
+        severidade: "error",
+      });
+      setErro(true);
+    } else if (isNaN(Number(tempoEntrega))) {
+      setMensagem({
+        texto: "O valor do campo Tempo estimado de entrega deve ser um número!",
+        severidade: "error",
+      });
+      setErro(true);
+    } else if (isNaN(Number(valorMinPedido.replace(",", ".")))) {
+      setMensagem({
+        texto: "O valor do campo Valor mínimo do pedido deve ser um número!",
+        severidade: "error",
       });
       setErro(true);
     } else {
-      setMensagem({
-        texto: "Cadastro realizado com sucesso!",
-        severidade: "success"
-      });
+      setMensagem({});
+      setAbrirMensagem(false);
       setErro(false);
     }
   }, [taxaEntrega, tempoEntrega, valorMinPedido]);

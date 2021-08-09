@@ -116,7 +116,7 @@ function getSteps() {
   return ["", "", ""];
 }
 
-export default function Steppers({ titulo, formsPassos }) {
+export default function Steppers({ titulo, formsPassos, statusCarregamento }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(1);
   const steps = getSteps();
@@ -126,7 +126,7 @@ export default function Steppers({ titulo, formsPassos }) {
     if (activeStep === 4) {
       setAbrirMensagem(true);
     }
-  }, [activeStep])
+  }, [activeStep]);
 
   function getStepContent(step) {
     switch (step) {
@@ -139,19 +139,11 @@ export default function Steppers({ titulo, formsPassos }) {
       case 3:
         return formsPassos[2];
       case 4:
-        return <CircularProgress />;
+        return (statusCarregamento ? <CircularProgress /> : mensagem.texto);
       default:
         return "Unknown step";
     }
   }
-
-  const displayButtons = () => {
-    if (activeStep > steps.length) {
-      return { display: "none" };
-    } else {
-      return;
-    }
-  };
 
   const handleNext = (e) => {
     if (erro) {
@@ -161,7 +153,7 @@ export default function Steppers({ titulo, formsPassos }) {
     }
 
     if (activeStep > steps.length) return;
-    
+
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -185,7 +177,7 @@ export default function Steppers({ titulo, formsPassos }) {
       </Stepper>
       <div className="conteudoForm">
         <form>{getStepContent(activeStep)}</form>
-        <div className={classes.buttonsStepper} style={displayButtons()}>
+        <div className={classes.buttonsStepper}>
           <Button
             disabled={activeStep === 1}
             onClick={handleBack}
