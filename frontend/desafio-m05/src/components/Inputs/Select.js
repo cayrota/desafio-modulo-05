@@ -78,7 +78,7 @@ export default function Selects({ id, opcoes, value, setValue, register }) {
 
     if (abrirMensagem && (value === "" || value === "0")) {
       setCampoEmBranco(true);
-    } else {
+    } else if (value) {
       setCampoEmBranco(false);
     }
   }, [value, abrirMensagem]);
@@ -91,10 +91,16 @@ export default function Selects({ id, opcoes, value, setValue, register }) {
     localStorage.setItem(id, valueRef.current);
   }
 
+  const validacao = () => {
+    if (campoEmBranco) {
+      return { style: { border: "1px solid hsla(4, 90%, 58%, 1)" } };
+    }
+  };
+
   return (
     <div className={clsx(classes.margin)}>
       <Select
-        {...register(`${id}`)}
+        {...register(`${id}`, { value: value })}
         id={id}
         value={value}
         {...register(id)}
@@ -102,11 +108,7 @@ export default function Selects({ id, opcoes, value, setValue, register }) {
         className={classes.width}
         onChange={handleChange}
         input={<BootstrapInput />}
-        SelectDisplayProps={
-          campoEmBranco && {
-            style: { border: "1px solid hsla(4, 90%, 58%, 1)" },
-          }
-        }
+        SelectDisplayProps={validacao()}
         IconComponent={ExpandMoreIcon}
         MenuProps={MenuProps}
       >

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from './routes';
+import Rotas from './rotas';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routes />
+    <Rotas />
   </React.StrictMode>,
   document.getElementById('root')
 );

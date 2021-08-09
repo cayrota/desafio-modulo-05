@@ -8,7 +8,7 @@ function FormPasso1({ register }) {
   const [email, setEmail] = useState();
   const [senha, setSenha] = useState();
   const [rptSenha, setRptSenha] = useState();
-  const { setErro, setMensagem } = useValidacaoForm();
+  const { setErro, setMensagem, setAbrirMensagem } = useValidacaoForm();
 
   useEffect(() => {
     if (!nome || !email || !senha || !rptSenha) {
@@ -23,8 +23,15 @@ function FormPasso1({ register }) {
         severidade: "error"
       });
       setErro(true);
+    } else if (senha !== rptSenha) {
+      setMensagem({
+        texto: "As senhas devem ser iguais",
+        severidade: "error"
+      });
+      setErro(true);
     } else {
       setMensagem({});
+      setAbrirMensagem(false);
       setErro(false);
     }
   }, [nome, email, senha, rptSenha]);

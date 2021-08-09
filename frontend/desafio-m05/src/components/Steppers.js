@@ -7,8 +7,9 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
-import useRegister from "../hooks/useValidacaoForm";
+import useValidacaoForm from "../hooks/useValidacaoForm";
 import CircularProgress from "./CircularProgress";
+import Snackbar from "./Snackbar";
 
 const useColorlibStepIconStyles = makeStyles({
   root: {
@@ -113,20 +114,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["", "", ""];
+  return ["1", "2", "3"];
 }
 
-export default function Steppers({ titulo, formsPassos }) {
+export default function Steppers({ titulo, formsPassos, statusCarregamento }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(1);
   const steps = getSteps();
-  const { erro, setAbrirMensagem } = useRegister();
-
-  useEffect(() => {
-    if (activeStep === 4) {
-      setAbrirMensagem(true);
-    }
-  }, [activeStep])
+  const { erro, setAbrirMensagem, mensagem, abrirMensagem } = useValidacaoForm();
 
   function getStepContent(step) {
     switch (step) {
@@ -139,29 +134,20 @@ export default function Steppers({ titulo, formsPassos }) {
       case 3:
         return formsPassos[2];
       case 4:
-        return <CircularProgress />;
+        return (statusCarregamento ? <CircularProgress /> : mensagem.texto);
       default:
         return "Unknown step";
     }
   }
 
-  const displayButtons = () => {
-    if (activeStep > steps.length) {
-      return { display: "none" };
-    } else {
-      return;
-    }
-  };
-
-  const handleNext = (e) => {
+  const handleNext = () => {
     if (erro) {
       return setAbrirMensagem(true);
     } else {
       setAbrirMensagem(false);
     }
 
-    if (activeStep > steps.length) return;
-    
+    if (activeStep === steps.length + 1) return;
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -179,13 +165,13 @@ export default function Steppers({ titulo, formsPassos }) {
         <h1>{titulo}</h1>
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+            <StepLabel StepIconComponent={ColorlibStepIcon} />
           </Step>
         ))}
       </Stepper>
       <div className="conteudoForm">
         <form>{getStepContent(activeStep)}</form>
-        <div className={classes.buttonsStepper} style={displayButtons()}>
+        <div className={classes.buttonsStepper}>
           <Button
             disabled={activeStep === 1}
             onClick={handleBack}
@@ -198,9 +184,10 @@ export default function Steppers({ titulo, formsPassos }) {
             variant="contained"
             onClick={(e) => handleNext(e)}
             className={clsx(classes.button, classes.contained)}
-          >
-            {activeStep === steps.length ? "Criar conta" : "Próximo"}
+            >
+            {activeStep >= steps.length ? "Criar conta" : "Próximo"}
           </Button>
+          <Snackbar />
         </div>
       </div>
     </div>

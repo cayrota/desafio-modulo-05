@@ -54,7 +54,7 @@ export default function TextFieldStyle({
   inputProps,
   value,
   setValue,
-  register
+  register,
 }) {
   const classes = useStyles();
   const [campoEmBranco, setCampoEmBranco] = useState(false);
@@ -72,7 +72,7 @@ export default function TextFieldStyle({
 
     if ((abrirMensagem && !value) || value === "") {
       setCampoEmBranco(true);
-    } else {
+    } else if (value) {
       setCampoEmBranco(false);
     }
   }, [value, abrirMensagem]);
@@ -80,15 +80,14 @@ export default function TextFieldStyle({
   const handleChange = (e) => {
     setValue(e.target.value);
   };
-  
+
   if (value !== undefined) {
     localStorage.setItem(id, valueRef.current);
   }
 
   return (
-    <div className={classes.root} >
+    <div className={classes.root}>
       <CssTextField
-        { ...register(`${id}`) }
         id={id}
         type={type}
         className={classes.margin}
@@ -97,6 +96,7 @@ export default function TextFieldStyle({
         rows={multiline ? rows : 1}
         inputProps={inputProps}
         value={value}
+        {...register(`${id}`, { value: value })}
         onChange={(e) => handleChange(e)}
         error={multiline ? false : campoEmBranco}
         helperText={multiline ? false : campoEmBranco && "Campo obrigatório"}

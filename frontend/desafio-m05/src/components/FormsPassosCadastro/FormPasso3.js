@@ -13,7 +13,7 @@ function FormPasso3({ register }) {
     if (!taxaEntrega || !tempoEntrega || !valorMinPedido) {
       setMensagem({
         texto: "Campo obrigatório vazio!",
-        severidade: "error"
+        severidade: "error",
       });
       setErro(true);
     } else if (
@@ -23,14 +23,29 @@ function FormPasso3({ register }) {
     ) {
       setMensagem({
         texto: "Campo obrigatório vazio!",
-        severidade: "error"
+        severidade: "error",
+      });
+      setErro(true);
+    } else if (isNaN(Number(taxaEntrega.replace(",", ".")))) {
+      setMensagem({
+        texto: "O campo 'Taxa de entrega' deve ser um número",
+        severidade: "error",
+      });
+      setErro(true);
+    } else if (isNaN(Number(valorMinPedido.replace(",", ".")))) {
+      setMensagem({
+        texto: "O campo 'Valor mínimo do pedido' deve ser um número",
+        severidade: "error",
+      });
+      setErro(true);
+    } else if (!Number(tempoEntrega)) {
+      setMensagem({
+        texto: "O campo 'Tempo de entrega estimado' deve ser um número",
+        severidade: "error",
       });
       setErro(true);
     } else {
-      setMensagem({
-        texto: "Cadastro realizado com sucesso!",
-        severidade: "success"
-      });
+      setMensagem({});
       setErro(false);
     }
   }, [taxaEntrega, tempoEntrega, valorMinPedido]);

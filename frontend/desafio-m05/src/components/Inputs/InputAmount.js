@@ -65,13 +65,30 @@ export default function InputAmount({ id, value, setValue, register }) {
 
     if ((abrirMensagem && !value) || value === "") {
       setCampoEmBranco(true);
-    } else {
+    } else if (value) {
       setCampoEmBranco(false);
     }
   }, [value, abrirMensagem]);
 
   const handleChange = (e) => {
-    setValue(e.target.value);
+    let v = e.target.value;
+    if (v.length === 1) {
+      v = `0,0${v}`;
+    } else if (v) {
+      let a = v.split(",").join("").split("");
+      const dc = a[a.length - 2] ?? 0;
+      const uc = a[a.length - 1] ?? 0;
+      a.pop();
+      a.pop();
+      if (a.length >= 2 && a[0] === "0") {
+        a.shift();
+      }
+      if (a.length === 0) {
+        a = ["0"];
+      }
+      v = `${a.join("") ?? 0},${dc}${uc}`;
+    }
+    setValue(v);
   };
 
   if (value !== undefined) {
@@ -81,7 +98,7 @@ export default function InputAmount({ id, value, setValue, register }) {
   return (
     <div className={clsx(classes.margin, classes.root)}>
       <OutlinedInput
-        {...register(`${id}`)}
+        {...register(`${id}`, { value: value })}
         id={id}
         error={campoEmBranco}
         value={value}

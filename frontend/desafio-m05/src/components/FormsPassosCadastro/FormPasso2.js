@@ -22,7 +22,7 @@ function FormPasso2({ register }) {
   const [nomeRestaurante, setNomeRestaurante] = useState();
   const [categoria, setCategoria] = useState("");
   const [descricao, setDescricao] = useState();
-  const { setErro, setMensagem } = useValidacaoForm();
+  const { setErro, setMensagem, setAbrirMensagem } = useValidacaoForm();
 
   useEffect(() => {
     if (!nomeRestaurante || !categoria) {
@@ -43,6 +43,7 @@ function FormPasso2({ register }) {
       setErro(true);
     } else {
       setMensagem({});
+      setAbrirMensagem(false);
       setErro(false);
     }
   }, [nomeRestaurante, categoria]);

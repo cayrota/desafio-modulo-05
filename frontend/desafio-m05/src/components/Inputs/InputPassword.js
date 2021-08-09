@@ -65,7 +65,7 @@ export default function InputPassword({ id, value, setValue, register }) {
 
     if ((abrirMensagem && !value) || value === "") {
       setCampoEmBranco(true);
-    } else {
+    } else if (value) {
       setCampoEmBranco(false);
     }
   }, [value, abrirMensagem]);
@@ -90,7 +90,7 @@ export default function InputPassword({ id, value, setValue, register }) {
     <div className={clsx(classes.margin, classes.root)}>
       <div>
         <OutlinedInput
-          { ...register(`${id}`) }
+          {...register(`${id}`, { value: value })}
           error={campoEmBranco}
           id={id}
           type={showPassword ? "text" : "password"}

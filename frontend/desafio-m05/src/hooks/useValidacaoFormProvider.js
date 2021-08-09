@@ -3,7 +3,7 @@ import { useState } from "react";
 function useValidacaoFormProvider() {
   const [erro, setErro] = useState(false);
   const [mensagem, setMensagem] = useState({});
-  const [abrirMensagem, setAbrirMensagem] = useState(false);
+  const [abrirMensagem, setAbrirMensagem] = useState();
 
   return {
     erro,
