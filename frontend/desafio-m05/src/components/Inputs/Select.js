@@ -3,7 +3,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputBase from "@material-ui/core/InputBase";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FormHelperText from "@material-ui/core/FormHelperText";
 import clsx from "clsx";
 import useValidacaoForm from "../../hooks/useValidacaoForm";

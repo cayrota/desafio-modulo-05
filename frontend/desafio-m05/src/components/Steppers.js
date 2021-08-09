@@ -120,7 +120,7 @@ export default function Steppers({ titulo, formsPassos, statusCarregamento }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(1);
   const steps = getSteps();
-  const { erro, setAbrirMensagem, mensagem } = useRegister();
+  const { erro, setAbrirMensagem } = useRegister();
 
   useEffect(() => {
     if (activeStep === 4) {
