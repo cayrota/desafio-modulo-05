@@ -29,9 +29,9 @@ function Routes() {
           <ValidacaoFormProvider>
             <Route path="/" exact component={Login} />
             <Route path="/cadastro" exact component={Cadastro} />
-            <Route path='/produtos' component={Produtos} />
           </ValidacaoFormProvider>
           <RotasProtegidas>
+            <Route path='/produtos' component={Produtos} />
           </RotasProtegidas>
         </Switch>
       </Router>
