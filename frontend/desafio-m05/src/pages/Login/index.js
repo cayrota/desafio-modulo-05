@@ -74,7 +74,7 @@ function Login() {
       <div className={loading ? classes.backdrop : classes.noBackdrop}>
         <CircularProgress />
       </div>
-      <img className={classes.illustrationLogin} src={IllustrationLogin} />
+      <img className={classes.illustrationLogin} src={IllustrationLogin} alt="" />
       <div className={classes.root}>
         <h2 className={classes.loginTitle}>Login</h2>
         <form
