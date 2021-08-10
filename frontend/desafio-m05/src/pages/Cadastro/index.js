@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 import { Link, useHistory } from "react-router-dom";
-import Ilustração from "../../assets/illustration.svg";
+import Ilustracao from "../../assets/illustration.svg";
 import Steppers from "../../components/Steppers";
 import FormPasso1 from "../../components/FormsPassosCadastro/FormPasso1";
 import FormPasso2 from "../../components/FormsPassosCadastro/FormPasso2";
@@ -80,7 +80,7 @@ function Cadastro() {
   
   return (
     <div className="Cadastro">
-      <img src={Ilustração} alt="Ilustração" className="desenhoBg" />
+      <img src={Ilustracao} alt="Ilustração" className="desenhoBg" />
       <div className="formCadastro">
         <form method="post" onSubmit={handleSubmit(onSubmit)}>
           <Steppers

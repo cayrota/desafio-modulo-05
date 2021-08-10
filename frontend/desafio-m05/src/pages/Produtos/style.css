@@ -7,28 +7,47 @@
   --montserrat: "Montserrat", sans-serif;
 }
 
-.Produtos {
+.Dashboard {
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.Produtos > .banner {
+.Dashboard > .banner {
   width: 100%;
   height: 248px;
   border-radius: 0px 0px 232.147px 0px;
   position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
-  justify-content: flex-end;
   align-items: flex-end;
 }
 
-.Produtos .profileImage {
+.Dashboard .profileImage {
   position: absolute;
   width: 176px;
   height: 176px;
-  bottom: -84px;
-  left: 152px;
+  bottom: -82px;
+  left: 112px;
   border: 6px solid #ffffff;
   border-radius: 50%;
+  z-index: 1;
+}
+
+.Dashboard .desenhoBanner {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.Dashboard .cabecalho {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0 216px 40px 320px;
 }
 
 button.logout {
@@ -36,6 +55,42 @@ button.logout {
   font-family: var(--montserrat);
   font-weight: 400;
   color: hsla(0, 0%, 100%, 1);
-  margin: 0px 216px 57px 0px;
   cursor: pointer;
+}
+
+.Dashboard h1 {
+  font-family: var(--baloo);
+  color: hsla(0, 100%, 100%, 1);
+  font-size: 32px;
+}
+
+.produtos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 500px;
+  text-align: center;
+  margin-top: 100px;
+  gap: 32px;
+}
+
+.Modal {
+  z-index: 2;
+}
+
+.FormNovoProduto h1 {
+  font-family: var(--baloo);
+  color: hsla(14, 99%, 41%, 1);
+  font-size: 32px;
+}
+
+span.avisoQtdCaracteres {
+  margin-left: 24px;
+  margin-top: -41px;
+  margin-bottom: 49px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: var(--montserrat);
 }

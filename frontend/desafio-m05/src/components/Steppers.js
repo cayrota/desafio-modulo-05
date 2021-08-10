@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -122,12 +121,6 @@ export default function Steppers({ titulo, formsPassos, statusCarregamento }) {
   const [activeStep, setActiveStep] = useState(1);
   const steps = getSteps();
   const { erro, setAbrirMensagem, mensagem } = useValidacaoForm();
-
-  useEffect(() => {
-    if (activeStep === 4) {
-      setAbrirMensagem(true);
-    }
-  }, [activeStep]);
 
   function getStepContent(step) {
     switch (step) {

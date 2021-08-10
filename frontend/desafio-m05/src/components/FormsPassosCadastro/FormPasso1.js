@@ -46,7 +46,7 @@ function FormPasso1({ register }) {
         setValue={setNome}
         register={register}
       />
-      <label htmlFor="email">E-mail</label>
+      <label htmlFor="email">Email</label>
       <TextField
         id="email"
         type="email"
