@@ -33,7 +33,7 @@ const cadastrarUsuario = async (req,res) =>
         const novoRestaurante = 
         {
             usuario_id: usuarioID,
-            nome : restaurante.nomeRestaurante,
+            nome : restaurante.nome,
             descricao: restaurante.descricao,
             categoria_id: restaurante.idCategoria,
             taxa_entrega: restaurante.taxaEntrega,

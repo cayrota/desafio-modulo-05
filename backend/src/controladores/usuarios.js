@@ -6,7 +6,7 @@ const schemaCadastroUsuario = require('../validacoes/schemaCadastroUsuario');
 
 const cadastraUsuario = async (req,res) => {
   const {restaurante, ...usuario} = req.body;
-
+console.log(req.body);
   try {
     await schemaCadastroUsuario.validate(req.body);
         

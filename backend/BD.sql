@@ -40,5 +40,12 @@ create table if not exists produto
     foreign key (restaurante_id) references restaurante (id)
 );
 
-insert into "categoria" (nome) values ('Diversos'),('Lanches'), ('Carnes'), ('Massas'), ('Pizzas'), ('Japonesa'), 
-('Chinesa'), ('Mexicano'), ('Brasileira'), ('Italiana'), ('Árabe');
+
+insert into "categoria" (nome, img_categoria) values ('Diversos', 'https://drive.google.com/file/d/1OLCQnzBu9xwUyNocAhAgqsK1LarpSSTN/view?usp=sharing'),('Lanches', 'https://drive.google.com/file/d/1AimVQxUid3WXHkvV9E7B7nSh0jA2Qv0G/view?usp=sharing'), ('Carnes', 'https://drive.google.com/file/d/19OumhJdWMWJePsLADPuuPH2lLFnNoa_u/view?usp=sharing'), ('Massas', 'https://drive.google.com/file/d/1vIz9EcmTH9QLN7UrtJk-a2AGZ1etBOSd/view?usp=sharing'), ('Pizzas', 'https://drive.google.com/file/d/1djp-MjW8ZT0FLspTx1grkP1kpJUJSpRT/view?usp=sharing'), ('Japonesa', 'https://drive.google.com/file/d/125SybpJjDmCOQ28iMWu-Z7guvK21Kn4M/view?usp=sharing'), 
+('Chinesa', 'https://drive.google.com/file/d/1M-fAvKS6C2GNjWejpqHFn-2hwD4YIQMq/view?usp=sharing'), ('Mexicano', 'https://drive.google.com/file/d/1Mlur4sP6XOjo93YDOqDL34z4KTrnMsmg/view?usp=sharing'), ('Brasileira', 'https://drive.google.com/file/d/1CCeIm353ledAMU1jKVw2kgB3W-VCE7Z1/view?usp=sharing'), ('Italiana', 'https://drive.google.com/file/d/12ZceRQJIc5Z0J_p1hxtEG8osdb6sM-L0/view?usp=sharing'), ('Árabe', 'https://drive.google.com/file/d/1SYxWevdxJYnOjLJHOYUqFUtmoTOiDYWD/view?usp=sharing');
+
+
+
+
+
+

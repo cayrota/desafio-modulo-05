@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000/";
+const BASE_URL = "http://localhost:3000/";
 
 async function get(resource) {
   const resposta = await fetch(BASE_URL + resource);

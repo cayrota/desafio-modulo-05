@@ -44,7 +44,7 @@ p, p.MuiFormHelperText-root {
 .desenhoBg {
   position: absolute;
   top: 48%;
-  right: -2.5%;
+  right: -1.5%;
   z-index: -1;
 }
 

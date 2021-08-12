@@ -33,7 +33,7 @@ function Cadastro() {
       email: data.email,
       senha: data.senha,
       restaurante: {
-        nome: data.nomeRestaurante,
+        nome: data.nome,
         descricao: data.descricao,
         idCategoria: data.categoria,
         taxaEntrega: Number(data.taxaEntrega.replace(",", ".")) * 100,
@@ -43,7 +43,7 @@ function Cadastro() {
     };
     
     try {
-      const dados = await post("cadastro", dadosAPI);
+      const dados = await post("usuarios", dadosAPI);
       const mensagemCadastro = await dados.json();
       setCarregando(false);
       
