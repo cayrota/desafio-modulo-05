@@ -4,6 +4,7 @@ import BackgroundLogin from '../../assets/bg-login.png';
 const useStyles = makeStyles((theme) => ({
   containerLogin: {
     backgroundImage: `url(${BackgroundLogin})`,
+    backgroundSize: 'cover',
     backgroundPosition: 'center',
     width: '100%',
     height: '100vh',
@@ -12,9 +13,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   illustrationLogin: {
-    height: '80%',
+    height: '85%',
     zIndex: 1,
-    marginLeft: '10.15%',
+    marginLeft: '16.25%',
   },
   root: {
     width: 488,
