@@ -8,7 +8,6 @@ import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import useValidacaoForm from "../hooks/useValidacaoForm";
 import CircularProgress from "./CircularProgress";
-import Snackbar from "./Snackbar";
 
 const useColorlibStepIconStyles = makeStyles({
   root: {
@@ -187,7 +186,6 @@ export default function Steppers({ titulo, formsPassos, statusCarregamento }) {
             >
             {activeStep >= steps.length ? "Criar conta" : "Próximo"}
           </Button>
-          <Snackbar />
         </div>
       </div>
     </div>

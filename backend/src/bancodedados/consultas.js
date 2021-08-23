@@ -7,7 +7,7 @@ const info = async (req,res) =>
 
     try
     {        
-        const { id: usuario_id } = jwt.verify(autorization, process.env.SENHA_JWT);
+        const { id: usuario_id } = jwt.verify(autorization, process.env.HASH_KEY);
         
         const categoria = await knex('categoria');
         const restaurante = await knex('restaurante').where({ usuario_id }).first();

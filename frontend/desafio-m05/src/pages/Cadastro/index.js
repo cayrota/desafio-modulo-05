@@ -43,7 +43,7 @@ function Cadastro() {
     };
     
     try {
-      const dados = await post("cadastro", dadosAPI);
+      const dados = await post("usuarios", dadosAPI);
       const mensagemCadastro = await dados.json();
       setCarregando(false);
       

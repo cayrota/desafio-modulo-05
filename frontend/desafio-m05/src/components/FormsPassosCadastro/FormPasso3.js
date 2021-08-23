@@ -59,6 +59,7 @@ function FormPasso3({ register }) {
         value={taxaEntrega}
         setValue={setTaxaEntrega}
         register={register}
+        width="408px"
       />
       <label htmlFor="tempoEntrega">Tempo estimado de entrega</label>
       <TextField
@@ -74,6 +75,7 @@ function FormPasso3({ register }) {
         value={valorMinPedido}
         setValue={setValorMinPedido}
         register={register}
+        width="408px"
       />
     </div>
   );

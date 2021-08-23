@@ -1,7 +1,7 @@
 const yup = require('./config');
 
 const cadastrarRestaurante = yup.object().shape({
-    nomeRestaurante: yup
+    nome: yup
         .string()
         .max(50)
         .required(),

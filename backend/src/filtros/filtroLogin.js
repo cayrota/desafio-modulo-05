@@ -3,15 +3,15 @@ const knex = require('../bancodedados/conexao');
 
 const filtroLogin = async (req, res, next) =>
 {
-    const { autorization } = req.headers;
+    const { authorization } = req.headers;
 
-    if(!autorization)
+    if(!authorization)
         return res.status(401).json('Token não informado');
 
     try 
     {
-        const token = autorization.replace('Bearer', '').trim();
-        const { id } = jwt.verify(token, process.env.SENHA_JWT);
+        const token = authorization.replace('Bearer', '').trim();
+        const { id } = jwt.verify(token, process.env.HASH_KEY);
         const usuarioExiste = await knex('usuario').where({id}).first();
 
         if(!usuarioExiste)

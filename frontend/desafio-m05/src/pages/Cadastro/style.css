@@ -63,7 +63,7 @@ div.MuiStep-root.MuiStep-horizontal {
   padding-right: 12px;
 }
 
-form > *{
+form > * {
   display: flex;
   flex-direction: column;
 }
