@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   textField: {
-    width: "408px",
     "& input": {
       padding: "10px 24px 10px 0",
       fontFamily: "'Montserrat', sans-serif",
@@ -48,7 +47,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function InputAmount({ id, value, setValue, register }) {
+export default function InputAmount({ id, value, setValue, register, width }) {
+  const useWidth = makeStyles(() => ({
+    widthProps: {
+      width: width,
+    }
+  }));
+  const classWidth = useWidth();
   const classes = useStyles();
   const [campoEmBranco, setCampoEmBranco] = useState(false);
   const { abrirMensagem } = useValidacaoForm();
@@ -105,7 +110,7 @@ export default function InputAmount({ id, value, setValue, register }) {
         error={campoEmBranco}
         value={value}
         onChange={(e) => handleChange(e)}
-        className={classes.textField}
+        className={clsx(classes.textField, classWidth.widthProps)}
         placeholder="00,00"
         startAdornment={
           <InputAdornment

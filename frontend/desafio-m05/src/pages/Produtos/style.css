@@ -72,7 +72,6 @@ button.logout {
   height: 100vh;
   width: 500px;
   text-align: center;
-  margin-top: 100px;
   gap: 32px;
 }
 
@@ -84,6 +83,7 @@ button.logout {
   font-family: var(--baloo);
   color: hsla(14, 99%, 41%, 1);
   font-size: 32px;
+  margin-bottom: 40px;
 }
 
 span.avisoQtdCaracteres {

@@ -47,6 +47,7 @@ function Login() {
         },
         body: JSON.stringify(data),
       });
+
       if (!response.ok) {
         setLoading(false);
         toast.error('Email ou senha incorretos.', toastError);

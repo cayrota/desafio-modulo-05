@@ -1,7 +1,11 @@
-const BASE_URL = "http://localhost:8000/";
+const BASE_URL = "http://localhost:3000/";
 
-async function get(resource) {
-  const resposta = await fetch(BASE_URL + resource);
+async function get(resource, token) {
+  const resposta = await fetch(BASE_URL + resource, {
+    headers: {
+      authorization: token,
+    }
+  });
 
   return resposta;
 }

@@ -21,7 +21,7 @@ const fazerLogin = async (req,res) =>
         if(!validarSenha)
             return res.status(404).json('Email e senha não conferem');
         
-        const token = jwt.sign({ id: usuario.id }, process.env.SENHA_JWT, {expiresIn: '8h'});
+        const token = jwt.sign({ id: usuario.id }, process.env.HASH_KEY, {expiresIn: '8h'});
 
         return res.status(200).json({ token });
     } 

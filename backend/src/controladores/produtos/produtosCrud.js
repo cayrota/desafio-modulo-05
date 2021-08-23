@@ -3,13 +3,13 @@ const knex = require('../../bancodedados/conexao');
 const schema = require('../../validacao/produstosSchema');
 
 const consultarProdutos = async (req,res) =>
-{
-    const { id } = req.params;    
-    const { autorization } = req.headers;
+{   
+    const { id } = req.params;
+    const usuario = req.usuario;
 
     try 
-    {        
-        const { id: usuario_id } = jwt.verify(autorization, process.env.SENHA_JWT);
+    {   
+        const { id: usuario_id } = usuario;
         const { id: restaurante_id } = await knex('restaurante').where({ usuario_id }).first();
         
         if(id)
@@ -23,10 +23,7 @@ const consultarProdutos = async (req,res) =>
             return res.status(200).json(produto);
         }
         
-        const produto = await knex('produto').where({ restaurante_id }).returning('*');
-        
-        if(produto.length === 0)
-            return res.status(400).json('Restaurante não possui produtos cadastrados.');
+        const produto = await knex('produto').where({ restaurante_id });
 
         return res.status(200).json(produto);
     }
@@ -43,7 +40,7 @@ const cadastrarProdutos = async (req,res) =>
 
     try    
     {
-        const { id: usuario_id } = jwt.verify(autorization, process.env.SENHA_JWT);
+        const { id: usuario_id } = jwt.verify(autorization, process.env.HASH_KEY);
         const { id: restaurante_id } = await knex('restaurante').where({ usuario_id }).first();
         
         await schema.cadastrarProduto.validate(req.body);
@@ -78,7 +75,7 @@ const editarProdutos = async (req,res) =>
         
     try 
     {
-        const { id: usuario_id } = jwt.verify(autorization, process.env.SENHA_JWT);
+        const { id: usuario_id } = jwt.verify(autorization, process.env.HASH_KEY);
         const { id: restaurante_id } = await knex('restaurante').where({ usuario_id }).first();
     
         await schema.editarProduto.validate(req.body);
